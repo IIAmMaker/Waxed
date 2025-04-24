@@ -6,11 +6,6 @@
   [![Patreon](https://i.imgur.com/sA2zMrl.png)](https://www.patreon.com/makers_mods)
 </center>
 
-# Video showcasing the mod:
-## Note:This mod **DOES NOT** require Dye Depot, but it's optional!
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SFBLz-0kzco" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-
 # **New Blocks:**
 - **Empty Honeycomb Block** *(Obtained by using a Glass Bottle on Honeycomb Block)*
 - **Wax Block**
