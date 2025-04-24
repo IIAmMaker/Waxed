@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "waxed:wax_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "waxed:wax"
+  }
+}

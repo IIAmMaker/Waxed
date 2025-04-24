@@ -1,0 +1,15 @@
+// 1.20.1	2025-04-10T17:47:14.6865939	Tags for minecraft:item mod id waxed
+04031e1bac6e86570edd0db319f7a091cda547d0 data/forge/tags/items/gravel.json
+a3d8291208292538f407ae29849555b097e4fb6a data/forge/tags/items/sand.json
+7fef43fc72db02ad48b0811ef83daf6ab8ee526a data/forge/tags/items/sand/colorless.json
+3f06fd2399b70d2a9a98c4ad746c6c282bb59086 data/forge/tags/items/sand/red.json
+cf558e16150533f3765b8208b70215b4a4a2806d data/minecraft/tags/items/candles.json
+a3d8291208292538f407ae29849555b097e4fb6a data/minecraft/tags/items/sand.json
+2160de08d5a035788d8aa34c7ab532ed5d49fa31 data/minecraft/tags/items/slabs.json
+a3d8291208292538f407ae29849555b097e4fb6a data/minecraft/tags/items/smelts_to_glass.json
+0326e8699598d6db865cf62ba7ecc5265955d46e data/minecraft/tags/items/soul_fire_base_blocks.json
+99c541c56d30145fe596938bfdfd01de512cd2d8 data/minecraft/tags/items/stairs.json
+d348744eb11429dc766024def8af8ab35961b61c data/minecraft/tags/items/walls.json
+1326e28e6ad73e91ce4328dfd35efba5a29b7d06 data/waxed/tags/items/candle_string.json
+c5dc11111d30c5c17d3daf598b20e8ffd9d8a729 data/waxed/tags/items/can_wax.json
+4bf9403b8d9f6d9047f685f38df711710c24c53b data/waxed/tags/items/tall_candles.json

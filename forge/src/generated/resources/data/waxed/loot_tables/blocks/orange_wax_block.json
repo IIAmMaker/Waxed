@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "waxed:orange_wax_block"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "waxed:blocks/orange_wax_block"
+}

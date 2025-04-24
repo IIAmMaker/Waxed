@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "waxed:wax"
+    },
+    {
+      "item": "waxed:wax"
+    },
+    {
+      "item": "waxed:wax"
+    },
+    {
+      "item": "waxed:wax"
+    },
+    {
+      "item": "waxed:wax"
+    },
+    {
+      "item": "waxed:wax"
+    },
+    {
+      "item": "waxed:wax"
+    },
+    {
+      "item": "waxed:wax"
+    },
+    {
+      "item": "waxed:wax"
+    }
+  ],
+  "result": {
+    "item": "waxed:wax_block"
+  }
+}

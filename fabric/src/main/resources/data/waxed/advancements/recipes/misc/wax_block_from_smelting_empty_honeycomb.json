@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_empty_honeycomb": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "waxed:empty_honeycomb"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "waxed:wax_block_from_smelting_empty_honeycomb"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_empty_honeycomb",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "waxed:wax_block_from_smelting_empty_honeycomb"
+    ]
+  },
+  "sends_telemetry_event": false
+}

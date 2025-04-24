@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "waxed:block/soul_candle_cake"
+    },
+    "lit=true": {
+      "model": "waxed:block/soul_candle_cake_lit"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "waxed:block/rose_wax_pillar_top",
+    "side": "waxed:block/melted_rose_wax_pillar"
+  }
+}

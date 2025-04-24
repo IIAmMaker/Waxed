@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "tall_candles",
+  "key": {
+    "C": {
+      "item": "dye_depot:slate_candle"
+    }
+  },
+  "pattern": [
+    "C",
+    "C"
+  ],
+  "result": {
+    "item": "waxed:slate_tall_candle"
+  },
+  "show_notification": true
+}

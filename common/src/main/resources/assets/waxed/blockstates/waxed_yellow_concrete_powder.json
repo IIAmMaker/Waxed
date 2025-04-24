@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "waxed:block/waxed_yellow_concrete_powder"
+      },
+      {
+        "model": "waxed:block/waxed_yellow_concrete_powder",
+        "y": 90
+      },
+      {
+        "model": "waxed:block/waxed_yellow_concrete_powder",
+        "y": 180
+      },
+      {
+        "model": "waxed:block/waxed_yellow_concrete_powder",
+        "y": 270
+      }
+    ]
+  }
+}

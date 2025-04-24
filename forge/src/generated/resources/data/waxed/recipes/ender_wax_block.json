@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wax_blocks",
+  "key": {
+    "D": {
+      "tag": "endergetic:ender_fire_base_blocks"
+    },
+    "W": {
+      "item": "waxed:wax_block"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WDW",
+    "WWW"
+  ],
+  "result": {
+    "count": 8,
+    "item": "waxed:ender_wax_block"
+  },
+  "show_notification": true
+}

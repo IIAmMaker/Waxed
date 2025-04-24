@@ -1,0 +1,170 @@
+plugins {
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle'
+    id 'org.spongepowered.mixin'
+}
+base {
+    archivesName = "${mod_name}-forge"
+}
+mixin {
+    add(sourceSets.main, "${mod_id}.refmap.json")
+
+    config("${mod_id}.mixins.json")
+    config("${mod_id}.forge.mixins.json")
+}
+
+minecraft {
+    mappings channel: 'official', version: minecraft_version
+
+    copyIdeResources = true //Calls processResources when in dev
+
+    // Automatically enable forge AccessTransformers if the file exists
+    // This location is hardcoded in Forge and can not be changed.
+    // https://github.com/MinecraftForge/MinecraftForge/blob/be1698bb1554f9c8fa2f58e32b9ab70bc4385e60/fmlloader/src/main/java/net/minecraftforge/fml/loading/moddiscovery/ModFile.java#L123
+    if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
+        accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    }
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+            args '--username', 'im_maker'
+            taskName 'Client'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                modClientRun {
+                    source sourceSets.main
+                    source project(":common").sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+            taskName 'Server'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                modServerRun {
+                    source sourceSets.main
+                    source project(":common").sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            taskName 'Data'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                modDataRun {
+                    source sourceSets.main
+                    source project(":common").sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources.srcDir 'src/generated/resources'
+
+repositories {
+    maven {
+        url "https://maven.blamejared.com"
+        content {
+            includeGroup "mezz.jei"
+        }
+    }
+    maven {
+        url = "https://api.modrinth.com/maven"
+    }
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroupByRegex("software\\.bernie.*")
+            includeGroup("com.eliotlash.mclib")
+        }
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    compileOnly project(":common")
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
+    implementation fg.deobf("maven.modrinth:betterf3:7.0.2")
+
+    //implementation fg.deobf("maven.modrinth:zeta:1.20.1-1.0-16")
+    //implementation fg.deobf("maven.modrinth:quark:1.20.1-4.0-441")
+    //implementation fg.deobf("maven.modrinth:copperative:ydByddwE")
+    implementation fg.deobf("maven.modrinth:oreganized:lkBhpYKn")
+    //implementation fg.deobf("maven.modrinth:create:9df9xn5Z")
+    implementation fg.deobf("maven.modrinth:blueprint:7.1.0")
+    implementation fg.deobf("maven.modrinth:buzzier-bees:6.0.0")
+    implementation fg.deobf("maven.modrinth:endergetic:5.0.1")
+    implementation fg.deobf("maven.modrinth:caverns-and-chasms:2.0.0")
+    implementation fg.deobf("maven.modrinth:upgrade-aquatic:6.0.0")
+    implementation fg.deobf("maven.modrinth:supplementaries:1.20-3.1.20")
+    implementation fg.deobf("maven.modrinth:supplementaries-squared:QqMQ0LSA")
+    implementation fg.deobf("maven.modrinth:amendments:luR9kOmm")
+    implementation fg.deobf("maven.modrinth:moonlight:ijfcawUq")
+    implementation fg.deobf("maven.modrinth:citadel:2.5.4")
+    implementation fg.deobf("maven.modrinth:i-wanna-skate:1.2.0")
+    implementation fg.deobf("maven.modrinth:dye-depot:1.0.0-forge")
+    implementation fg.deobf("maven.modrinth:farmers-delight:1.20.1-1.2.4")
+    implementation fg.deobf("maven.modrinth:my-nethers-delight:4Dt3pl7s")
+    implementation fg.deobf("maven.modrinth:twigs:1.20.1-3.1.1")
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
+    implementation("com.eliotlash.mclib:mclib:20")
+    //implementation "curse.maven:geckolib-388172:5460143"
+    implementation fg.deobf("curse.maven:aromatic-1042492:5740938")
+
+}
+
+tasks.withType(JavaCompile).configureEach {
+    source(project(":common").sourceSets.main.allSource)
+}
+tasks.withType(Javadoc).configureEach {
+    source(project(":common").sourceSets.main.allJava)
+}
+tasks.named("sourcesJar", Jar) {
+    from(project(":common").sourceSets.main.allSource)
+}
+
+processResources {
+    from project(":common").sourceSets.main.resources
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId base.archivesName.get()
+            from components.java
+            fg.component(it)
+        }
+    }
+    repositories {
+        maven {
+            url "file://" + System.getenv("local_maven")
+        }
+    }
+}

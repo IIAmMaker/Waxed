@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "tag": "waxed:candle_string"
+    },
+    "T": {
+      "tag": "minecraft:soul_fire_base_blocks"
+    },
+    "W": {
+      "tag": "waxed:can_wax"
+    }
+  },
+  "pattern": [
+    "S",
+    "W",
+    "T"
+  ],
+  "result": {
+    "count": 4,
+    "item": "waxed:soul_candle"
+  },
+  "show_notification": true
+}

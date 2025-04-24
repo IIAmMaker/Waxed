@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "axis=x,melted=false": {
+      "model": "waxed:block/rose_wax_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,melted=false": {
+      "model": "waxed:block/rose_wax_pillar"
+    },
+    "axis=z,melted=false": {
+      "model": "waxed:block/rose_wax_pillar_horizontal",
+      "x": 90
+    },
+    "axis=x,melted=true": {
+      "model": "waxed:block/melted_rose_wax_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,melted=true": {
+      "model": "waxed:block/melted_rose_wax_pillar"
+    },
+    "axis=z,melted=true": {
+      "model": "waxed:block/melted_rose_wax_pillar_horizontal",
+      "x": 90
+    }
+  }
+}

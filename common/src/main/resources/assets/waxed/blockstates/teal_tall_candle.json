@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "lit=false,part=short": {
+      "model": "waxed:block/teal_tall_candle_short"
+    },
+    "lit=false,part=tall": {
+      "model": "waxed:block/teal_tall_candle_tall"
+    },
+    "part=middle": {
+      "model": "waxed:block/teal_tall_candle_middle"
+    },
+    "lit=true,part=short": {
+      "model": "waxed:block/teal_tall_candle_short_lit"
+    },
+    "lit=true,part=tall": {
+      "model": "waxed:block/teal_tall_candle_tall_lit"
+    }
+  }
+}

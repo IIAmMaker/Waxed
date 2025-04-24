@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "waxed:block/wick"
+    },
+    "lit=true": {
+      "model": "waxed:block/soul_wick_lit"
+    }
+  }
+}

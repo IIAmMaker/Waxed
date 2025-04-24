@@ -1,0 +1,10 @@
+{
+  "item.shovel.wax_off": {
+    "sounds": [
+      "waxed:item/shovel/wax_off1",
+      "waxed:item/shovel/wax_off2",
+      "waxed:item/shovel/wax_off3"
+    ],
+    "subtitle": "subtitles.item.shovel.wax_off"
+  }
+}

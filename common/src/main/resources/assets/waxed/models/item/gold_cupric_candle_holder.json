@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "waxed:item/gold_cupric_candle_holder"
+  }
+}

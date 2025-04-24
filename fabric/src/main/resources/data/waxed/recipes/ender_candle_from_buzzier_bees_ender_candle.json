@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "buzzier_bees:ender_candle"
+    }
+  ],
+  "result": {
+    "item": "waxed:ender_candle"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "waxed:block/light_blue_wax_pillar_top",
+    "side": "waxed:block/light_blue_wax_pillar"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "buzzier_bees:cupric_candle"
+    }
+  ],
+  "result": {
+    "item": "waxed:cupric_candle"
+  }
+}

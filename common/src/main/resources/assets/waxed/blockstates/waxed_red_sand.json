@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "waxed:block/waxed_red_sand"
+      },
+      {
+        "model": "waxed:block/waxed_red_sand",
+        "y": 90
+      },
+      {
+        "model": "waxed:block/waxed_red_sand",
+        "y": 180
+      },
+      {
+        "model": "waxed:block/waxed_red_sand",
+        "y": 270
+      }
+    ]
+  }
+}

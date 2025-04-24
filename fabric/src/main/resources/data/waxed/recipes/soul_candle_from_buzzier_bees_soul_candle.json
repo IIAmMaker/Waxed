@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "buzzier_bees:soul_candle"
+    }
+  ],
+  "result": {
+    "item": "waxed:soul_candle"
+  }
+}

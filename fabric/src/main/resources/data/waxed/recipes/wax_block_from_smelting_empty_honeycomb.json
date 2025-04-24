@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "wax_block",
+  "ingredient": {
+    "item": "waxed:empty_honeycomb"
+  },
+  "result": "waxed:wax_block"
+}

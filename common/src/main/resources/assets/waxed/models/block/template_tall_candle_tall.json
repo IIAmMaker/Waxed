@@ -1,0 +1,40 @@
+{
+  "texture_size": [32, 16],
+  "textures": {
+    "particle": "#wax_pillar",
+    "tall_candle": "#tall_candle"
+  },
+  "elements": [
+    {
+      "from": [5, 0, 5],
+      "to": [11, 16, 11],
+      "rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
+      "faces": {
+        "north": {"uv": [3, 0, 6, 16], "texture": "#tall_candle"},
+        "east": {"uv": [3, 0, 6, 16], "texture": "#tall_candle"},
+        "south": {"uv": [3, 0, 6, 16], "texture": "#tall_candle"},
+        "west": {"uv": [3, 0, 6, 16], "texture": "#tall_candle"},
+        "up": {"uv": [9, 6, 6, 0], "texture": "#tall_candle"},
+        "down": {"uv": [12, 0, 9, 6], "texture": "#tall_candle"}
+      }
+    },
+    {
+      "from": [7.5, 16, 8],
+      "to": [8.5, 18, 8],
+      "rotation": {"angle": 45, "axis": "y", "origin": [8, 18, 8]},
+      "faces": {
+        "north": {"uv": [9, 14, 9.5, 16], "texture": "#tall_candle"},
+        "south": {"uv": [9, 14, 9.5, 16], "texture": "#tall_candle"}
+      }
+    },
+    {
+      "from": [7.5, 16, 8],
+      "to": [8.5, 18, 8],
+      "rotation": {"angle": -45, "axis": "y", "origin": [8, 18, 8]},
+      "faces": {
+        "north": {"uv": [9, 14, 9.5, 16], "texture": "#tall_candle"},
+        "south": {"uv": [9, 14, 9.5, 16], "texture": "#tall_candle"}
+      }
+    }
+  ]
+}

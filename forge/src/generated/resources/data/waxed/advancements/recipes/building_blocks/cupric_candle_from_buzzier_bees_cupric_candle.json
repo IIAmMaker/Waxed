@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cupric_candle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "buzzier_bees:cupric_candle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "waxed:cupric_candle_from_buzzier_bees_cupric_candle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_cupric_candle",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "waxed:cupric_candle_from_buzzier_bees_cupric_candle"
+    ]
+  },
+  "sends_telemetry_event": false
+}

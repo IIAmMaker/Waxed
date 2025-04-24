@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "tall_candles",
+  "key": {
+    "C": {
+      "item": "minecraft:magenta_candle"
+    }
+  },
+  "pattern": [
+    "C",
+    "C"
+  ],
+  "result": {
+    "item": "waxed:magenta_tall_candle"
+  },
+  "show_notification": true
+}

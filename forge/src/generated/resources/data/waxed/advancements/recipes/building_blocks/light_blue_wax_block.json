@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "waxed:light_blue_wax_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wax_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "waxed:wax_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wax_block",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "waxed:light_blue_wax_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

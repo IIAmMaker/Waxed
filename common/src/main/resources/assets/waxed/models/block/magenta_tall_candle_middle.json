@@ -1,0 +1,7 @@
+{
+  "parent": "waxed:block/template_tall_candle_middle",
+  "textures": {
+    "particle": "waxed:block/magenta_wax_pillar",
+    "tall_candle": "waxed:block/magenta_tall_candle"
+  }
+}

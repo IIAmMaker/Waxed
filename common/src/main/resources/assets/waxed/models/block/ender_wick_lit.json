@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "waxed:block/ender_wick_lit"
+  }
+}

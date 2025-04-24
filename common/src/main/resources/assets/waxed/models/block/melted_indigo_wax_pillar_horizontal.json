@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "waxed:block/indigo_wax_pillar_top",
+    "side": "waxed:block/melted_indigo_wax_pillar"
+  }
+}

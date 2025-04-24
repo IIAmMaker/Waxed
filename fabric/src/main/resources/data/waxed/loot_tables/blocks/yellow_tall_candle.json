@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "waxed:yellow_tall_candle",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "part": "short"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "condition": "minecraft:any_of",
+                  "terms": [
+                    {
+                      "block": "waxed:yellow_tall_candle",
+                      "condition": "minecraft:block_state_property",
+                      "properties": {
+                        "part": "middle"
+                      }
+                    },
+                    {
+                      "block": "waxed:yellow_tall_candle",
+                      "condition": "minecraft:block_state_property",
+                      "properties": {
+                        "part": "tall"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "waxed:yellow_tall_candle"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "waxed:blocks/yellow_tall_candle"
+}

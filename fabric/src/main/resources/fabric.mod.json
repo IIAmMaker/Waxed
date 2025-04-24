@@ -1,0 +1,39 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "homepage": "https://modrinth.com/mod/waxed",
+        "sources": "https://github.com/IIAmMaker/Waxed"
+    },
+    "license": "${license}",
+    "icon": "${mod_id}_logo.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "${group}.${modname}"
+        ],
+        "client": [
+            "${group}.${modname}Client"
+        ]
+    },
+    "mixins": [
+        "${mod_id}.mixins.json",
+        "${mod_id}.fabric.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.16.9",
+        "fabric-api": "*",
+        "minecraft": "${minecraft_version}",
+        "java": ">=17"
+    },
+    "suggests": {
+        "supplementaries": "*",
+        "suppsquared": "*"
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "tall_candles",
+  "key": {
+    "C": {
+      "item": "minecraft:black_candle"
+    }
+  },
+  "pattern": [
+    "C",
+    "C"
+  ],
+  "result": {
+    "item": "waxed:black_tall_candle"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wax_pillars",
+  "key": {
+    "W": {
+      "item": "waxed:green_wax_block"
+    }
+  },
+  "pattern": [
+    "W",
+    "W"
+  ],
+  "result": {
+    "count": 2,
+    "item": "waxed:green_wax_pillar"
+  },
+  "show_notification": true
+}

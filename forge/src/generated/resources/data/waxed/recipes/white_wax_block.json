@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wax_blocks",
+  "key": {
+    "D": [],
+    "W": {
+      "item": "waxed:wax_block"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WDW",
+    "WWW"
+  ],
+  "result": {
+    "count": 8,
+    "item": "waxed:white_wax_block"
+  },
+  "show_notification": true
+}

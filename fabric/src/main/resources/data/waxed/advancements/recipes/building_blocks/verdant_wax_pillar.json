@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "waxed:verdant_wax_pillar"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_verdant_wax_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "waxed:verdant_wax_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_verdant_wax_block",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "waxed:verdant_wax_pillar"
+    ]
+  },
+  "sends_telemetry_event": false
+}

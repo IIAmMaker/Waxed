@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "waxed:block/cupric_wick_lit"
+  }
+}
