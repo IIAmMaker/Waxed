@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:rock_coral_block"
+    },
+    {
+      "tag": "waxed:can_wax"
+    }
+  ],
+  "result": {
+    "item": "waxed:waxed_rock_coral_block"
+  }
+}

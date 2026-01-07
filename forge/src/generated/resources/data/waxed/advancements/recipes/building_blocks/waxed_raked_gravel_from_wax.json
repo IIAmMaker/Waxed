@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raked_gravel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "supplementaries:raked_gravel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "waxed:waxed_raked_gravel_from_wax"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_raked_gravel",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "waxed:waxed_raked_gravel_from_wax"
+    ]
+  },
+  "sends_telemetry_event": false
+}

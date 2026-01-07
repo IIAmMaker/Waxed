@@ -3,10 +3,13 @@
   "category": "building",
   "ingredients": [
     {
-      "item": "buzzier_bees:cupric_candle"
+      "item": "minecraft:sponge"
+    },
+    {
+      "tag": "waxed:can_wax"
     }
   ],
   "result": {
-    "item": "waxed:cupric_candle"
+    "item": "waxed:waxed_sponge"
   }
 }
