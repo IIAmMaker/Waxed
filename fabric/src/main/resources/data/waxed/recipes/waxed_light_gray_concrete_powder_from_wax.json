@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:light_gray_concrete_powder"
+    },
+    {
+      "tag": "waxed:can_wax"
+    }
+  ],
+  "result": {
+    "item": "waxed:waxed_light_gray_concrete_powder"
+  }
+}

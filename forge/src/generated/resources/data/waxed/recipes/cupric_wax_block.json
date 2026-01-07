@@ -3,9 +3,10 @@
   "category": "building",
   "group": "wax_blocks",
   "key": {
-    "D": {
-      "tag": "caverns_and_chasms:cupric_fire_base_blocks"
-    },
+    "D": [
+      {"tag": "caverns_and_chasms:cupric_fire_base_blocks"},
+      {"tag": "caverns_and_chasms:cupric_fire_base_items"}
+    ],
     "W": {
       "item": "waxed:wax_block"
     }

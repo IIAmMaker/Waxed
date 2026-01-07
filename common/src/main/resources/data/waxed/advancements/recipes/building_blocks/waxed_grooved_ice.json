@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "waxed:waxed_grooved_ice"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_waxed_ice": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "waxed:waxed_ice"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_waxed_ice",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "waxed:waxed_grooved_ice"
+    ]
+  },
+  "sends_telemetry_event": false
+}

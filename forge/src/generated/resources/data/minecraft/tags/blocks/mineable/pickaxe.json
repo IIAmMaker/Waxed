@@ -60,12 +60,11 @@
     "waxed:soul_tall_candle",
     "waxed:cupric_tall_candle",
     "waxed:ender_tall_candle",
-    "waxed:waxed_redstone_block",
-    "waxed:waxed_magma_block",
     "waxed:waxed_tube_coral_block",
     "waxed:waxed_brain_coral_block",
     "waxed:waxed_bubble_coral_block",
     "waxed:waxed_fire_coral_block",
-    "waxed:waxed_horn_coral_block"
+    "waxed:waxed_horn_coral_block",
+    "waxed:waxed_ice"
   ]
 }

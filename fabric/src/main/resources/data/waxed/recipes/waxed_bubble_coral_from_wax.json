@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:bubble_coral"
+    },
+    {
+      "tag": "waxed:can_wax"
+    }
+  ],
+  "result": {
+    "item": "waxed:waxed_bubble_coral"
+  }
+}

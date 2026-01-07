@@ -1,0 +1,34 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "farmersdelight"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "oreganized"
+        }
+      ]
+    }
+  ],
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "waxed:waxed_ice"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 1,
+        "id": "waxed:waxed_grooved_ice"
+      }
+    }
+  ],
+  "tool": {
+    "item": "oreganized:scribe"
+  }
+}

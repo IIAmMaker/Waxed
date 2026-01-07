@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "oreganized"
+    }
+  ],
+  "type": "oreganized:scribe",
+  "from": {
+    "blocks": [
+      "waxed:waxed_ice"
+    ]
+  },
+  "to": "waxed:waxed_grooved_ice"
+}

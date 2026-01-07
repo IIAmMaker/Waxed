@@ -5,9 +5,10 @@
     "S": {
       "tag": "waxed:candle_string"
     },
-    "T": {
-      "tag": "caverns_and_chasms:cupric_fire_base_blocks"
-    },
+    "T": [
+      {"tag": "caverns_and_chasms:cupric_fire_base_blocks"},
+      {"tag": "caverns_and_chasms:cupric_fire_base_items"}
+    ],
     "W": {
       "tag": "waxed:can_wax"
     }

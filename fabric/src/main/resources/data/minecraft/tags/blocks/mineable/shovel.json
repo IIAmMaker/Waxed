@@ -66,21 +66,12 @@
     "waxed:waxed_pink_concrete_powder",
     "waxed:wax_block",
     "waxed:soul_wax_block",
-    "waxed:cupric_wax_block",
-    "waxed:ender_wax_block",
     "waxed:wax_pillar",
     "waxed:soul_wax_pillar",
-    "waxed:cupric_wax_pillar",
-    "waxed:ender_wax_pillar",
     "waxed:tall_candle",
     "waxed:soul_tall_candle",
-    "waxed:cupric_tall_candle",
-    "waxed:ender_tall_candle",
     "waxed:waxed_sand",
     "waxed:waxed_red_sand",
-    "waxed:waxed_gravel",
-    "waxed:waxed_powder_snow",
-    "waxed:waxed_ice",
-    "waxed:waxed_soul_sand"
+    "waxed:waxed_gravel"
   ]
 }

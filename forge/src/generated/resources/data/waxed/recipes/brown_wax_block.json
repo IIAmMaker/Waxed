@@ -3,7 +3,9 @@
   "category": "building",
   "group": "wax_blocks",
   "key": {
-    "D": [],
+    "D": {
+      "item": "minecraft:brown_dye"
+    },
     "W": {
       "item": "waxed:wax_block"
     }

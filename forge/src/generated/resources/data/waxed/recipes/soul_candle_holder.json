@@ -10,8 +10,8 @@
     }
   },
   "pattern": [
-    "NCN",
-    " N "
+    "C",
+    "N"
   ],
   "result": {
     "item": "waxed:soul_candle_holder"
