@@ -25,7 +25,6 @@ minecraft {
     if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
         accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     }
-
     runs {
         client {
             workingDirectory project.file('run')
@@ -64,7 +63,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
-                modDataRun {
+                "${mod_id}" {
                     source sourceSets.main
                     source project(":common").sourceSets.main
                 }
@@ -114,24 +113,24 @@ dependencies {
     //implementation fg.deobf("maven.modrinth:zeta:1.20.1-1.0-16")
     //implementation fg.deobf("maven.modrinth:quark:1.20.1-4.0-441")
     //implementation fg.deobf("maven.modrinth:copperative:ydByddwE")
-    implementation fg.deobf("maven.modrinth:oreganized:lkBhpYKn")
+    //implementation fg.deobf("maven.modrinth:oreganized:f8GepkAs")
     //implementation fg.deobf("maven.modrinth:create:9df9xn5Z")
-    implementation fg.deobf("maven.modrinth:blueprint:7.1.0")
+    implementation fg.deobf("maven.modrinth:blueprint:7.1.3")
     implementation fg.deobf("maven.modrinth:buzzier-bees:6.0.0")
     implementation fg.deobf("maven.modrinth:endergetic:5.0.1")
     implementation fg.deobf("maven.modrinth:caverns-and-chasms:2.0.0")
     implementation fg.deobf("maven.modrinth:upgrade-aquatic:6.0.0")
-    implementation fg.deobf("maven.modrinth:supplementaries:1.20-3.1.20")
-    implementation fg.deobf("maven.modrinth:supplementaries-squared:QqMQ0LSA")
-    implementation fg.deobf("maven.modrinth:amendments:luR9kOmm")
-    implementation fg.deobf("maven.modrinth:moonlight:ijfcawUq")
+    implementation fg.deobf("maven.modrinth:supplementaries:LAQ22yJj")
+    implementation fg.deobf("maven.modrinth:supplementaries-squared:IMFQf21R")
+    implementation  fg.deobf("maven.modrinth:amendments:NCs7sRuH")
+    runtimeOnly fg.deobf("maven.modrinth:moonlight:q6pVkPDR")
     implementation fg.deobf("maven.modrinth:citadel:2.5.4")
     implementation fg.deobf("maven.modrinth:i-wanna-skate:1.2.0")
     implementation fg.deobf("maven.modrinth:dye-depot:1.0.0-forge")
     implementation fg.deobf("maven.modrinth:farmers-delight:1.20.1-1.2.4")
     implementation fg.deobf("maven.modrinth:my-nethers-delight:4Dt3pl7s")
     implementation fg.deobf("maven.modrinth:twigs:1.20.1-3.1.1")
-    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
+    runtimeOnly fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
     implementation("com.eliotlash.mclib:mclib:20")
     //implementation "curse.maven:geckolib-388172:5460143"
     implementation fg.deobf("curse.maven:aromatic-1042492:5740938")
