@@ -1,6 +1,7 @@
 package net.im_maker.waxed.common.util;
 
 import net.im_maker.waxed.Waxed;
+import net.im_maker.waxed.config.WaxedAndShinyConfig;
 import net.minecraft.SharedConstants;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
@@ -30,6 +31,9 @@ public class DataPackRegistrar {
             }
             if (ModList.get().isLoaded("oreganized")) {
                 onAddPackFindersO(event);
+            }
+            if (WaxedAndShinyConfig.GENERATE_WAXING_RECIPES.get()) {
+                onAddPackFindersGWR(event);
             }
         }
     }
@@ -89,6 +93,28 @@ public class DataPackRegistrar {
                         (path) -> new PathPackResources(path, datapack_file, true),
                         new Pack.Info(
                                 Component.literal("Waxed & Shiny Oreganized Compat"),
+                                SharedConstants.getCurrentVersion().getPackVersion(PackType.SERVER_DATA),
+                                FeatureFlagSet.of()
+                        ),
+                        PackType.SERVER_DATA,
+                        Pack.Position.TOP,
+                        true,
+                        PackSource.BUILT_IN
+                )
+        ));
+    }
+
+    private static void onAddPackFindersGWR(AddPackFindersEvent event) {
+        IModFileInfo mod = ModList.get().getModFileById(Waxed.MOD_ID);
+        Path datapack_file = mod.getFile().findResource("resourcepacks/waxed_generated_recipes");
+        event.addRepositorySource(packConsumer -> packConsumer.accept(
+                Pack.create(
+                        "waxed_generated_recipes",
+                        Component.literal("Waxed & Shiny"),
+                        true,
+                        (path) -> new PathPackResources(path, datapack_file, true),
+                        new Pack.Info(
+                                Component.literal("Waxed & Shiny"),
                                 SharedConstants.getCurrentVersion().getPackVersion(PackType.SERVER_DATA),
                                 FeatureFlagSet.of()
                         ),

@@ -4,6 +4,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
+import net.im_maker.waxed.config.WaxedAndShinyConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.im_maker.waxed.Waxed;
 import net.minecraft.world.item.crafting.CraftingRecipe;
@@ -19,7 +20,9 @@ public class WaxedJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        List<CraftingRecipe> waxingRecipes = WaxingRecipeMaker.createWaxingRecipes();
-        registration.addRecipes(RecipeTypes.CRAFTING, waxingRecipes);
+        if (WaxedAndShinyConfig.GENERATE_WAXING_RECIPES.get()) {
+            List<CraftingRecipe> waxingRecipes = WaxingRecipeMaker.createWaxingRecipes();
+            registration.addRecipes(RecipeTypes.CRAFTING, waxingRecipes);
+        }
     }
 }
