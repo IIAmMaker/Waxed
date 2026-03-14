@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_forest_concrete_powder": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dye_depot:forest_concrete_powder"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "waxed:waxed_forest_concrete_powder_from_wax"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_forest_concrete_powder",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "waxed:waxed_forest_concrete_powder_from_wax"
+    ]
+  },
+  "sends_telemetry_event": false
+}
