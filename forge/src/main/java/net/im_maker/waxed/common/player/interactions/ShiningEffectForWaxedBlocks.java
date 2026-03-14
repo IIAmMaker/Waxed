@@ -5,6 +5,8 @@ import com.mojang.blaze3d.vertex.SheetedDecalTextureGenerator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.im_maker.waxed.Waxed;
 import net.im_maker.waxed.common.util.WTags;
+import net.im_maker.waxed.config.WaxedAndShinyClientConfig;
+import net.im_maker.waxed.config.WaxedAndShinyConfig;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -42,19 +44,19 @@ public class ShiningEffectForWaxedBlocks {
     private static final Set<BlockPos> renderedBlocks = new HashSet<>();
     private static final int RENDER_RADIUS = 5;
 
-    // Pattern for texture cycles: 0, 1, 2, 3, 3, 3, 2, 4
     private static final int[] textureCycle = {1, 2, 3, 4, 5, 6, 7, 8 ,9 ,10 ,6, 6, 6, 6 ,6, 6, 6, 6 ,6, 6, 6, 6 ,6, 6, 6, 6};
-    private static int tickCounter = 0; // To keep track of the tick and texture cycle
+    private static int tickCounter = 0;
 
     @SubscribeEvent
     public static void onRenderLevelLast(RenderLevelStageEvent event) {
+        if (!WaxedAndShinyClientConfig.SHINING_OVERLAY_ON_WAXED_BLOCKS.get()) return;
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         if (player == null || mc.level == null || mc.isPaused() || event.getStage() != RenderLevelStageEvent.Stage.AFTER_SOLID_BLOCKS) return;
 
         ItemStack heldItem = player.getMainHandItem();
         ItemStack offhandItem = player.getOffhandItem();
-        if (!(heldItem.is(WTags.Items.CAN_WAX) || offhandItem.is(WTags.Items.CAN_WAX))) return;
+        if (!(heldItem.is(WTags.Items.CAN_SHOW_WAXED_BLOCKS) || offhandItem.is(WTags.Items.CAN_SHOW_WAXED_BLOCKS))) return;
 
         Camera camera = mc.gameRenderer.getMainCamera();
         Vec3 cameraPos = camera.getPosition();
@@ -77,7 +79,7 @@ public class ShiningEffectForWaxedBlocks {
                     BlockPos blockPos = playerPos.offset(dx, dy, dz);
                     BlockState blockState = mc.level.getBlockState(blockPos);
 
-                    // Avoid redundant rendering.
+                    // Avoid redundant rendering
                     if (!renderedBlocks.add(blockPos)) continue;
                     if (!isItWaxedBlock(blockState)) continue;
                     if (!isBlockInFrustum(blockPos, mc.levelRenderer)) continue;
@@ -94,7 +96,7 @@ public class ShiningEffectForWaxedBlocks {
                         closestDistanceSquared = blockDistanceSquared;
                     }
 
-                    // Render shining effect.
+                    // Render shining effect
                     poseStack.pushPose();
                     poseStack.translate(
                             blockPos.getX() - camX,

@@ -1,6 +1,8 @@
 package net.im_maker.waxed;
 
 import com.ninni.dye_depot.registry.DDDyes;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -14,6 +16,7 @@ import net.im_maker.waxed.common.player.interactions.WaxingBlocks;
 import net.im_maker.waxed.common.sounds.WSounds;
 import net.im_maker.waxed.common.util.DataPackRegistrar;
 import net.im_maker.waxed.common.util.WRecipeSerializers;
+import net.im_maker.waxed.config.WaxedAndShinyConfig;
 import net.mehvahdjukaar.supplementaries.reg.ModRegistry;
 import net.mehvahdjukaar.suppsquared.SuppSquared;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,7 +24,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +52,7 @@ public class Waxed implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		isDyeDepotLoaded(FabricLoader.getInstance().isModLoaded("dye_depot"));
+		AutoConfig.register(WaxedAndShinyConfig.class, GsonConfigSerializer::new);
 		DataPackRegistrar.loadBuiltinResourcePacks();
 		WParticles.registerParticles();
 		WBlocks.registerBlocks();
@@ -153,11 +156,9 @@ public class Waxed implements ModInitializer {
 				WBlocks.WAXED_SAND,
 				WBlocks.WAXED_RED_SAND,
 				WBlocks.WAXED_GRAVEL,
-				WBlocks.WAXED_ICE,
-				WBlocks.WAXED_SPONGE);
+				WBlocks.WAXED_ICE);
 		if (FabricLoader.getInstance().isModLoaded("supplementaries")){
-			entries.addAfter(WBlocks.WAXED_SPONGE,
-					//WBlocks.WAXED_SOAP_BLOCK,
+			entries.addAfter(WBlocks.WAXED_ICE,
 					WBlocks.WAXED_SUGAR_CUBE,
 					WBlocks.WAXED_RAKED_GRAVEL);
 		}

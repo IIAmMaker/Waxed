@@ -4,14 +4,15 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.ninni.dye_depot.registry.DDDyes;
-import com.teamabnormals.caverns_and_chasms.common.entity.animal.CopperGolem;
+import com.teamabnormals.atmospheric.core.registry.AtmosphericBlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import galena.oreganized.index.OBlocks;
 import net.im_maker.waxed.Waxed;
 import net.im_maker.waxed.common.block.WBlocks;
 import net.im_maker.waxed.common.item.WItems;
 import net.im_maker.waxed.common.sounds.WSounds;
 import net.im_maker.waxed.common.util.WTags;
+import net.im_maker.waxed.config.WaxedAndShinyClientConfig;
+import net.im_maker.waxed.config.WaxedAndShinyConfig;
 import net.mehvahdjukaar.supplementaries.reg.ModRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
@@ -62,7 +63,7 @@ public class WaxingBlocks {
         waxedBlocks.put(Blocks.SAND, WBlocks.WAXED_SAND.get());
         waxedBlocks.put(Blocks.RED_SAND, WBlocks.WAXED_RED_SAND.get());
         waxedBlocks.put(Blocks.GRAVEL, WBlocks.WAXED_GRAVEL.get());
-        waxedBlocks.put(Blocks.SPONGE, WBlocks.WAXED_SPONGE.get());
+        //waxedBlocks.put(Blocks.SPONGE, WBlocks.WAXED_SPONGE.get());
         for (DyeColor color : DyeColor.values()) {
             String dyeID = "minecraft";
             if (ModList.get().isLoaded("dye_depot")) {
@@ -75,6 +76,10 @@ public class WaxingBlocks {
         if (ModList.get().isLoaded("supplementaries")) {
             waxedBlocks.put(ModRegistry.SUGAR_CUBE.get(), WBlocks.WAXED_SUGAR_CUBE.get());
             waxedBlocks.put(ModRegistry.RAKED_GRAVEL.get(), WBlocks.WAXED_RAKED_GRAVEL.get());
+        }
+        if (ModList.get().isLoaded("atmospheric")) {
+            waxedBlocks.put(AtmosphericBlocks.ARID_SAND.get(), WBlocks.WAXED_ARID_SAND.get());
+            waxedBlocks.put(AtmosphericBlocks.RED_ARID_SAND.get(), WBlocks.WAXED_RED_ARID_SAND.get());
         }
         waxedBlocks.putAll(waxedBlocks);
         return waxedBlocks;
@@ -211,7 +216,7 @@ public class WaxingBlocks {
             waxedBlocks.put(UABlocks.ELDER_PRISMARINE_CORAL_SHOWER.get(), WBlocks.WAXED_ELDER_PRISMARINE_CORAL_SHOWER.get());
         }
         if (ModList.get().isLoaded("oreganized")) {
-            waxedBlocks.put(OBlocks.GROOVED_ICE.get(), WBlocks.WAXED_GROOVED_ICE.get());
+            waxedBlocks.put(Waxed.getBlockFromString("oreganized", "grooved_ice"), WBlocks.WAXED_GROOVED_ICE.get());
         }
         waxedBlocks.putAll(waxedBlocks);
         return waxedBlocks;
@@ -227,6 +232,7 @@ public class WaxingBlocks {
         waxedBlocks.put(Blocks.POWDER_SNOW, WBlocks.WAXED_POWDER_SNOW.get());
         waxedBlocks.put(Blocks.SOUL_SAND, WBlocks.WAXED_SOUL_SAND.get());
         waxedBlocks.put(Blocks.REDSTONE_BLOCK, WBlocks.WAXED_REDSTONE_BLOCK.get());
+        waxedBlocks.put(Blocks.SPONGE, WBlocks.WAXED_SPONGE.get());
         waxedBlocks.putAll(waxedBlocks);
         return waxedBlocks;
     });
@@ -267,7 +273,7 @@ public class WaxingBlocks {
         ItemStack itemStack = interactEvent.getItemStack();
         var waxedBlock1 = getWaxedShovels(blockState.getBlock());
         var waxedBlock2 = getWaxedAxe(blockState.getBlock());
-        if (itemStack.is(WTags.Items.CAN_WAX) && (waxedBlock1.isPresent() || waxedBlock2.isPresent() && (blockState.getValue(BlockStateProperties.LAYERS) == 8))) {
+        if (itemStack.is(WTags.Items.CAN_WAX) && (waxedBlock1.isPresent() || waxedBlock2.isPresent())) {
             Player player = interactEvent.getEntity();
             if (player instanceof ServerPlayer) {
                 CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockPos, itemStack);
@@ -304,7 +310,8 @@ public class WaxingBlocks {
         if (itemStack.is(ItemTags.SHOVELS) && (unwaxedBlock1.isPresent())) {
             if (unwaxedBlock1.isPresent()) unwaxing(interactEvent ,blockPos ,itemStack ,level ,unwaxedBlock1.isPresent(), unwaxedBlock1.get().withPropertiesOf(blockState), WSounds.SHOVEL_WAX_OFF.get());
             return InteractionResult.sidedSuccess(level.isClientSide);
-        } else if (itemStack.is(ItemTags.AXES) && (unwaxedBlock2.isPresent() || unwaxedBlock5.isPresent())) {
+        } else if (itemStack.is(ItemTags.AXES) && (unwaxedBlock1.isPresent() || unwaxedBlock2.isPresent() || unwaxedBlock5.isPresent())) {
+            if (unwaxedBlock1.isPresent()) unwaxing(interactEvent ,blockPos ,itemStack ,level ,unwaxedBlock1.isPresent(), unwaxedBlock1.get().withPropertiesOf(blockState), SoundEvents.AXE_WAX_OFF);
             if (unwaxedBlock2.isPresent()) unwaxing(interactEvent ,blockPos ,itemStack ,level ,unwaxedBlock2.isPresent(), unwaxedBlock2.get().withPropertiesOf(blockState), SoundEvents.AXE_WAX_OFF);
             if (unwaxedBlock5.isPresent()) unwaxing(interactEvent ,blockPos ,itemStack ,level ,unwaxedBlock5.isPresent(), unwaxedBlock5.get().withPropertiesOf(blockState), SoundEvents.AXE_WAX_OFF);
             return InteractionResult.sidedSuccess(level.isClientSide);
@@ -341,6 +348,7 @@ public class WaxingBlocks {
 
     @SubscribeEvent
     public static InteractionResult waxOnUsingWaxOnlyPlayerInteract(final PlayerInteractEvent.RightClickBlock interactEvent) {
+        if (!WaxedAndShinyConfig.WAXED_BLOCKS.get()) return (InteractionResult.PASS);
         Level level = interactEvent.getLevel();
         BlockPos blockPos = interactEvent.getPos();
         BlockState blockState = level.getBlockState(blockPos);
@@ -389,6 +397,7 @@ public class WaxingBlocks {
 
     @SubscribeEvent
     public static InteractionResult onEntityInteract(final PlayerInteractEvent.EntityInteract interactEvent) {
+        if (!WaxedAndShinyConfig.WAXED_BLOCKS.get()) return (InteractionResult.PASS);
         ItemStack itemStack = interactEvent.getItemStack();
         if (ModList.get().isLoaded("caverns_and_chasms")) {
             try {

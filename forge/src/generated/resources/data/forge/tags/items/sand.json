@@ -1,6 +1,8 @@
 {
   "values": [
     "waxed:waxed_sand",
-    "waxed:waxed_red_sand"
+    "waxed:waxed_red_sand",
+    "waxed:waxed_arid_sand",
+    "waxed:waxed_red_arid_sand"
   ]
 }

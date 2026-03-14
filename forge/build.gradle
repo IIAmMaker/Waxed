@@ -120,6 +120,7 @@ dependencies {
     implementation fg.deobf("maven.modrinth:endergetic:5.0.1")
     implementation fg.deobf("maven.modrinth:caverns-and-chasms:2.0.0")
     implementation fg.deobf("maven.modrinth:upgrade-aquatic:6.0.0")
+    implementation fg.deobf("maven.modrinth:atmospheric:6.1.1")
     implementation fg.deobf("maven.modrinth:supplementaries:LAQ22yJj")
     implementation fg.deobf("maven.modrinth:supplementaries-squared:IMFQf21R")
     implementation  fg.deobf("maven.modrinth:amendments:NCs7sRuH")

@@ -52,19 +52,17 @@ public class WaxingBlocks {
         waxedBlocks.put(Blocks.SAND, WBlocks.WAXED_SAND);
         waxedBlocks.put(Blocks.RED_SAND, WBlocks.WAXED_RED_SAND);
         waxedBlocks.put(Blocks.GRAVEL, WBlocks.WAXED_GRAVEL);
-        waxedBlocks.put(Blocks.SPONGE, WBlocks.WAXED_SPONGE);
         for (DyeColor color : DyeColor.values()) {
             String dyeID = "minecraft";
             if (FabricLoader.getInstance().isModLoaded("dye_depot")) {
-                for (DDDyes dddcolor : DDDyes.values()) {
-                    if (dddcolor.getName() == color.getName()) dyeID = "dye_depot";
+                for (DDDyes ddcolor : DDDyes.values()) {
+                    if (ddcolor.getName() == color.getName()) dyeID = "dye_depot";
                 }
             }
             waxedBlocks.put(Waxed.getBlockFromString(dyeID, color + "_concrete_powder"), Waxed.getBlockFromString("waxed_" + color + "_concrete_powder"));
         }
 
         if (FabricLoader.getInstance().isModLoaded("supplementaries")) {
-            //waxedBlocks.put(ModRegistry.FODDER, WaxedModBlocks.WAXED_FODDER);
             waxedBlocks.put(ModRegistry.SUGAR_CUBE.get(), WBlocks.WAXED_SUGAR_CUBE);
             waxedBlocks.put(ModRegistry.RAKED_GRAVEL.get(), WBlocks.WAXED_RAKED_GRAVEL);
         }
@@ -314,6 +312,10 @@ public class WaxingBlocks {
             if (unwaxedBlock2.isPresent()) {
                 return processWaxOff(player, level, blockPos, blockState, itemStack,
                         unwaxedBlock2.get(), SoundEvents.AXE_WAX_OFF);
+            }
+            if (unwaxedBlock1.isPresent()) {
+                return processWaxOff(player, level, blockPos, blockState, itemStack,
+                        unwaxedBlock1.get(), SoundEvents.AXE_WAX_OFF);
             }
         }
         return InteractionResult.PASS;

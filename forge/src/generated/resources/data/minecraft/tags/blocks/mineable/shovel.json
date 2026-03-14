@@ -78,6 +78,8 @@
     "waxed:ender_tall_candle",
     "waxed:waxed_sand",
     "waxed:waxed_red_sand",
-    "waxed:waxed_gravel"
+    "waxed:waxed_gravel",
+    "waxed:waxed_arid_sand",
+    "waxed:waxed_red_arid_sand"
   ]
 }

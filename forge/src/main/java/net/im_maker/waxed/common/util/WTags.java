@@ -25,6 +25,7 @@ public class WTags {
         public static final TagKey<Item> TALL_CANDLES = tag("tall_candles");
         public static final TagKey<Item> WAX_PILLARS = tag("wax_pillars");
         public static final TagKey<Item> CAN_WAX = tag("can_wax");
+        public static final TagKey<Item> CAN_SHOW_WAXED_BLOCKS = tag("can_show_waxed_blocks");
         public static final TagKey<Item> CANDLE_STRING = tag("candle_string");
 
         public static TagKey<Item> create(ResourceLocation name) {

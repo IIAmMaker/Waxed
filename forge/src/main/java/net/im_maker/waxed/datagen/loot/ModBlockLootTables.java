@@ -102,6 +102,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(WBlocks.WAXED_GRAVEL.get());
         this.dropSelf(WBlocks.WAXED_POWDER_SNOW.get());
         this.dropSelf(WBlocks.WAXED_ICE.get());
+        this.dropSelf(WBlocks.WAXED_GROOVED_ICE.get());
         this.dropSelf(WBlocks.WAXED_PRISMARINE.get());
         this.dropSelf(WBlocks.WAXED_PRISMARINE_STAIRS.get());
         this.dropSelf(WBlocks.WAXED_PRISMARINE_SLAB.get());
@@ -197,13 +198,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                 LootItem.lootTableItem(pCandleBlock)
                                         .apply(List.of(1, 2), (integer) -> {
                                             if (integer == 1) {
-                                                // Drop 1 if SHORT
                                                 return SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))
                                                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(pCandleBlock)
                                                                 .setProperties(StatePropertiesPredicate.Builder.properties()
                                                                         .hasProperty(TallCandleBlock.CANDLE_PART, CandlePart.SHORT)));
                                             } else {
-                                                // Drop 2 if MIDDLE or TALL
                                                 return SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))
                                                         .when(
                                                                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(pCandleBlock)

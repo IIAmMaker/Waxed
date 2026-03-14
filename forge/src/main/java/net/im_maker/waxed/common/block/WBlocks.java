@@ -5,9 +5,6 @@ import net.im_maker.waxed.common.block.custom.*;
 import net.im_maker.waxed.common.item.WItems;
 import net.im_maker.waxed.common.particles.WParticles;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
@@ -40,7 +37,7 @@ public class WBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, "supplementaries");
     public static final DeferredRegister<Block> BLOCKS_O =
             DeferredRegister.create(ForgeRegistries.BLOCKS, "oreganized");
-    //Stuff
+
     public static final RegistryObject<Block> EMPTY_HONEYCOMB = registerBlock("empty_honeycomb", () -> new EmptyHoneycombBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(0.6f).sound(SoundType.CORAL_BLOCK)));
     public static final RegistryObject<Block> HONEYCOMB_BLOCK = BLOCKS_V.register("honeycomb_block", () -> new HoneycombBlock(BlockBehaviour.Properties.copy(Blocks.HONEYCOMB_BLOCK)));
 
@@ -124,7 +121,7 @@ public class WBlocks {
     public static final RegistryObject<Block> WAXED_RED_SAND = registerBlock("waxed_red_sand", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.SNARE).strength(0.5f).sound(SoundType.SAND)));
     public static final RegistryObject<Block> WAXED_GRAVEL = registerBlock("waxed_gravel", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.SNARE).strength(0.6f).sound(SoundType.GRAVEL)));
     public static final RegistryObject<Block> WAXED_POWDER_SNOW = registerBlock("waxed_powder_snow", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).strength(0.25F).sound(SoundType.SNOW)));
-    public static final RegistryObject<Block> WAXED_ICE = registerBlock("waxed_ice", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.ICE).strength(0.5F).sound(SoundType.GLASS).noOcclusion()));
+    public static final RegistryObject<Block> WAXED_ICE = registerBlock("waxed_ice", () -> new HalfTransparentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.ICE).strength(0.5F).sound(SoundType.GLASS).noOcclusion()));
     public static final RegistryObject<Block> WAXED_MAGMA_BLOCK = registerBlock("waxed_magma_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().lightLevel((BlockState) -> {return 3;}).strength(0.5F).emissiveRendering(WBlocks::always)));
     public static final RegistryObject<Block> WAXED_SOUL_SAND = registerBlock("waxed_soul_sand", () -> new SoulSandBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.COW_BELL).strength(0.5f).sound(SoundType.SOUL_SAND).isRedstoneConductor(WBlocks::always).isViewBlocking(WBlocks::always).isSuffocating(WBlocks::always)));
     public static final RegistryObject<Block> WAXED_PRISMARINE = registerBlock("waxed_prismarine", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F)));
@@ -218,15 +215,41 @@ public class WBlocks {
     public static final RegistryObject<Block> WAXED_PRISMARINE_CORAL_WALL_FAN = BLOCKS.register("waxed_prismarine_coral_wall_fan", () -> new BaseCoralWallFanBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIAMOND).noCollission().instabreak().sound(SoundType.WET_GRASS).dropsLike(WAXED_PRISMARINE_CORAL_FAN.get()).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> WAXED_ELDER_PRISMARINE_CORAL_WALL_FAN = BLOCKS.register("waxed_elder_prismarine_coral_wall_fan", () -> new BaseCoralWallFanBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIAMOND).noCollission().instabreak().sound(SoundType.WET_GRASS).dropsLike(WAXED_PRISMARINE_CORAL_FAN.get()).pushReaction(PushReaction.DESTROY)));
 
+    public static final RegistryObject<Block> WAXED_ARID_SAND = registerBlock(
+            "waxed_arid_sand",
+            () -> createAridSand()
+    );
+
+    private static Block createAridSand() {
+        if (ModList.get().isLoaded("atmospheric")) {
+            return AridSand.WAXED_ARID_SAND.get();
+        }
+        return new Block(BlockBehaviour.Properties.copy(Blocks.SAND));
+    }
+    public static final RegistryObject<Block> WAXED_RED_ARID_SAND = registerBlock(
+            "waxed_red_arid_sand",
+            () -> createRedAridSand()
+    );
+
+    private static Block createRedAridSand() {
+        if (ModList.get().isLoaded("atmospheric")) {
+            return AridSand.WAXED_RED_ARID_SAND.get();
+        }
+        return new Block(BlockBehaviour.Properties.copy(Blocks.SAND));
+    }
+
+    //public static final RegistryObject<Block> WAXED_ARID_SAND = registerBlock("waxed_arid_sand", () -> ModList.get().isLoaded("atmospheric") ? AridSand.WAXED_ARID_SAND.get() : new Block(BlockBehaviour.Properties.copy(Blocks.SAND)));
+    //public static final RegistryObject<Block> WAXED_RED_ARID_SAND = registerBlock("waxed_red_arid_sand", () -> ModList.get().isLoaded("atmospheric") ? AridSand.WAXED_RED_ARID_SAND.get() : new Block(BlockBehaviour.Properties.copy(Blocks.SAND)));
+
     public static final RegistryObject<Block> WAXED_PRISMARINE_CORAL_SHOWER = registerBlock("waxed_prismarine_coral_shower", () -> new WaxedCoralShowerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIAMOND).noCollission().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY)));
     public static final RegistryObject<Block> WAXED_ELDER_PRISMARINE_CORAL_SHOWER = registerBlock("waxed_elder_prismarine_coral_shower", () -> new WaxedCoralShowerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIAMOND).noCollission().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY)));
 
     //Supplementaries Waxed Blocks
-    public static final RegistryObject<Block> WAXED_SUGAR_CUBE = registerBlockS("waxed_sugar_cube", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).strength(0.5F).sound(SoundType.SAND)));
-    public static final RegistryObject<Block> WAXED_RAKED_GRAVEL = registerBlockS("waxed_raked_gravel",  () -> ModList.get().isLoaded("supplementaries") ? CandleHolders.WAXED_RAKED_GRAVEL.get() : new Block(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
-    public static final RegistryObject<Block> WAXED_SOAP_BLOCK = registerBlockS("waxed_soap_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(DyeColor.PINK).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.25F, 4.0F).sound(SoundType.CORAL_BLOCK)));
+    public static final RegistryObject<Block> WAXED_SUGAR_CUBE = registerBlock("waxed_sugar_cube", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).strength(0.5F).sound(SoundType.SAND)));
+    public static final RegistryObject<Block> WAXED_RAKED_GRAVEL = registerBlock("waxed_raked_gravel",  () -> ModList.get().isLoaded("supplementaries") ? CandleHolders.WAXED_RAKED_GRAVEL.get() : new Block(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
+    public static final RegistryObject<Block> WAXED_SOAP_BLOCK = registerBlock("waxed_soap_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(DyeColor.PINK).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.25F, 4.0F).sound(SoundType.CORAL_BLOCK)));
     //Oreganized Waxed Blocks
-    public static final RegistryObject<Block> WAXED_GROOVED_ICE = registerBlockO("waxed_grooved_ice", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ICE)));
+    public static final RegistryObject<Block> WAXED_GROOVED_ICE = registerBlock("waxed_grooved_ice", () -> new HalfTransparentBlock(BlockBehaviour.Properties.copy(Blocks.ICE)));
 
     private static boolean always(BlockState p_50775_, BlockGetter p_50776_, BlockPos p_50777_) {
         return true;
@@ -252,7 +275,7 @@ public class WBlocks {
         return new Block(BlockBehaviour.Properties.of().mapColor(pMapColor).instrument(NoteBlockInstrument.SNARE).strength(0.5f).sound(SoundType.SAND));
     }
     
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
+    public static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
         return toReturn;

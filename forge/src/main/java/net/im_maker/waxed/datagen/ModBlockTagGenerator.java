@@ -3,22 +3,22 @@ package net.im_maker.waxed.datagen;
 import com.ninni.dye_depot.registry.DDDyes;
 import com.teamabnormals.caverns_and_chasms.core.other.tags.CCBlockTags;
 import com.teamabnormals.endergetic.core.other.tags.EEBlockTags;
-import galena.oreganized.index.OTags;
 import net.im_maker.waxed.Waxed;
 import net.im_maker.waxed.common.block.WBlocks;
 import net.im_maker.waxed.common.util.WTags;
-import net.mehvahdjukaar.supplementaries.Supplementaries;
 import net.mehvahdjukaar.supplementaries.reg.ModTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.Nullable;
-import vectorwing.farmersdelight.integration.crafttweaker.FarmersDelightCrTPlugin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,8 +48,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
             ));
         }
 
-        if (ModList.get().isLoaded("dye_depot")) {
-            this.tag(OTags.Blocks.MINEABLE_WITH_SCRIBE).add(
+        if (ModList.get().isLoaded("oreganized")) {
+            this.tag(TagKey.create(Registries.BLOCK, new ResourceLocation("oreganized","mineable/scribe"))).add(
                     WBlocks.WAXED_ICE.get(),
                     WBlocks.WAXED_GROOVED_ICE.get()
             );

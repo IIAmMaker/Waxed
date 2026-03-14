@@ -87,7 +87,7 @@ public class WBlocks {
     public static final Block WAXED_SAND = registerBlock("waxed_sand", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).instrument(NoteBlockInstrument.SNARE).strength(0.5f).sound(SoundType.SAND)));
     public static final Block WAXED_RED_SAND = registerBlock("waxed_red_sand", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.SNARE).strength(0.5f).sound(SoundType.SAND)));
     public static final Block WAXED_GRAVEL = registerBlock("waxed_gravel", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.SNARE).strength(0.6f).sound(SoundType.GRAVEL)));
-    public static final Block WAXED_ICE = registerBlock("waxed_ice", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.ICE).strength(0.5F).sound(SoundType.GLASS).noOcclusion()));
+    public static final Block WAXED_ICE = registerBlock("waxed_ice", new HalfTransparentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.ICE).strength(0.5F).sound(SoundType.GLASS).noOcclusion()));
     public static final Block WAXED_SPONGE = registerBlock("waxed_sponge", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.6F).sound(SoundType.GRASS)));
     public static final List<Block> WAXED_COLORED_CONCRETE_POWDER = registerWaxedColoredConcretePowder();
     private static <T extends Block> List<Block> registerWaxedColoredConcretePowder () {
@@ -177,13 +177,9 @@ public class WBlocks {
     public static final Block WAXED_ELDER_PRISMARINE_CORAL_SHOWER = registerBlock("waxed_elder_prismarine_coral_shower", new WaxedCoralShowerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIAMOND).noCollission().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY)));
 
     //Supplementaries Waxed Blocks
-    public static final Block WAXED_SUGAR_CUBE = registerBlockS("waxed_sugar_cube", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).strength(0.5F).sound(SoundType.SAND)));
-    public static final Block WAXED_SOAP_BLOCK = registerBlockS("waxed_soap_block", new Block(BlockBehaviour.Properties.of().mapColor(DyeColor.PINK).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.25F, 4.0F).sound(SoundType.CORAL_BLOCK)));
-    public static final Block WAXED_RAKED_GRAVEL = registerBlockS("waxed_raked_gravel",  FabricLoader.getInstance().isModLoaded("supplementaries") ? CandleHolders.WAXED_RAKED_GRAVEL.get() : new Block(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
-    //Oreganized Waxed Blocks
-    //public static final Block WAXED_GROOVED_ICE = registerBlockO("waxed_grooved_ice", new Block(BlockBehaviour.Properties.copy(Blocks.ICE)));
-
-
+    public static final Block WAXED_SUGAR_CUBE = registerBlock("waxed_sugar_cube", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).strength(0.5F).sound(SoundType.SAND)));
+    public static final Block WAXED_SOAP_BLOCK = registerBlock("waxed_soap_block", new Block(BlockBehaviour.Properties.of().mapColor(DyeColor.PINK).instrument(NoteBlockInstrument.DIDGERIDOO).strength(1.25F, 4.0F).sound(SoundType.CORAL_BLOCK)));
+    public static final Block WAXED_RAKED_GRAVEL = registerBlock("waxed_raked_gravel",  FabricLoader.getInstance().isModLoaded("supplementaries") ? CandleHolders.WAXED_RAKED_GRAVEL.get() : new Block(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
 
     public static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);

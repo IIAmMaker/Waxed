@@ -3,13 +3,12 @@ package net.im_maker.waxed;
 import com.ninni.dye_depot.registry.DDDyes;
 import com.teamabnormals.buzzier_bees.core.registry.BBBlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import galena.oreganized.index.OBlocks;
 import net.im_maker.waxed.common.block.WBlocks;
 import net.im_maker.waxed.common.item.WItems;
 import net.im_maker.waxed.common.particles.WParticles;
-import net.im_maker.waxed.common.util.GroovingWithScribe;
 import net.im_maker.waxed.common.util.WRecipeSerializers;
 import net.im_maker.waxed.common.sounds.WSounds;
+import net.im_maker.waxed.config.WaxedAndShinyClientConfig;
 import net.im_maker.waxed.config.WaxedAndShinyConfig;
 import net.mehvahdjukaar.supplementaries.reg.ModRegistry;
 import net.mehvahdjukaar.suppsquared.SuppSquared;
@@ -30,6 +29,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -54,27 +54,19 @@ public class Waxed {
             DyeColor.BLUE, DyeColor.PURPLE, DyeColor.MAGENTA, DyeColor.PINK
     ));
     public static List<DyeColor> customColorOrderR = new ArrayList<>(customColorOrder);
-    static {
-        Collections.reverse(customColorOrderR);
-    }
-
+    static {Collections.reverse(customColorOrderR);}
     public Waxed() {
         isDyeDepotLoaded(ModList.get().isLoaded("dye_depot"));
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, WaxedAndShinyConfig.SPEC, "waxed_and_shiny-server.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, WaxedAndShinyConfig.SPEC, "waxed_and_shiny-common.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, WaxedAndShinyClientConfig.SPEC, "waxed_and_shiny-client.toml");
         WParticles.register(modEventBus);
         WBlocks.register(modEventBus);
         WItems.register(modEventBus);
         WSounds.register(modEventBus);
         WRecipeSerializers.RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         modEventBus.addListener(this::addCreative);
-        modEventBus.addListener(this::onLoadComplete);
-
-    }
-
-    private void onLoadComplete(FMLLoadCompleteEvent event) {
-        GroovingWithScribe.registerGroovedBlocks();
     }
 
     public static void isDyeDepotLoaded(Boolean b) {
@@ -91,34 +83,35 @@ public class Waxed {
             ));
             customColorOrderR = new ArrayList<>(customColorOrder);
             Collections.reverse(customColorOrderR);
-        } else {
-            customColorOrder = customColorOrder;
-            customColorOrderR = customColorOrderR;
         }
     }
 
     private static void addAfter(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> map, ItemLike after, ItemLike... blocks) {
         for (int i = blocks.length - 1; i >= 0; i--) {
             ItemLike block = blocks[i];
-            map.putAfter(FUNCTION.apply(after), FUNCTION.apply(block), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            if (block != null) {
+                map.putAfter(FUNCTION.apply(after), FUNCTION.apply(block), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            }
         }
     }
 
     private static void addBefore(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> map, ItemLike before, ItemLike... blocks) {
         for (ItemLike block : blocks) {
-            map.putBefore(FUNCTION.apply(before), FUNCTION.apply(block), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            if (block != null) {
+                map.putBefore(FUNCTION.apply(before), FUNCTION.apply(block), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            }
         }
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries = event.getEntries();
         entries.remove(new ItemStack(Blocks.HONEYCOMB_BLOCK));
-        if (ModList.get().isLoaded("buzzier_bees") && event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+        if (ModList.get().isLoaded("buzzier_bees") && event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS && WaxedAndShinyConfig.CANDLE_VARIANTS.get()) {
             entries.remove(new ItemStack(BBBlocks.SOUL_CANDLE.get()));
             entries.remove(new ItemStack(BBBlocks.CUPRIC_CANDLE.get()));
             entries.remove(new ItemStack(BBBlocks.ENDER_CANDLE.get()));
         }
-        if (ModList.get().isLoaded("supplementaries")) {
+        if (ModList.get().isLoaded("supplementaries") && WaxedAndShinyConfig.CANDLE_VARIANTS.get()) {
             if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
                 addBefore(entries, ModRegistry.CANDLE_HOLDERS.get(DyeColor.WHITE).get(), WBlocks.SOUL_CANDLE_HOLDER.get());
                 if (ModList.get().isLoaded("endergetic")) {
@@ -138,7 +131,7 @@ public class Waxed {
                 }
             }
         }
-        if (ModList.get().isLoaded("suppsquared")) {
+        if (ModList.get().isLoaded("suppsquared") && WaxedAndShinyConfig.CANDLE_VARIANTS.get()) {
             if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
                 addBefore(entries, SuppSquared.GOLDEN_CANDLE_HOLDERS.get(DyeColor.WHITE).get(), WBlocks.GOLD_SOUL_CANDLE_HOLDER.get());
                 if (ModList.get().isLoaded("endergetic")) {
@@ -159,47 +152,58 @@ public class Waxed {
             }
         }
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
-            addAfter(entries, Items.CANDLE, WBlocks.SOUL_CANDLE.get());
-            if (ModList.get().isLoaded("endergetic")) {
-                addAfter(entries, WBlocks.SOUL_CANDLE.get(), WBlocks.ENDER_CANDLE.get());
+            if (WaxedAndShinyConfig.CANDLE_VARIANTS.get()) {
+                addAfter(entries, Items.CANDLE, WBlocks.SOUL_CANDLE.get());
+                if (ModList.get().isLoaded("endergetic")) {
+                    addAfter(entries, WBlocks.SOUL_CANDLE.get(), WBlocks.ENDER_CANDLE.get());
+                }
+                if (ModList.get().isLoaded("caverns_and_chasms")) {
+                    addAfter(entries, WBlocks.SOUL_CANDLE.get(), WBlocks.CUPRIC_CANDLE.get());
+                }
             }
-            if (ModList.get().isLoaded("caverns_and_chasms")) {
-                addAfter(entries, WBlocks.SOUL_CANDLE.get(), WBlocks.CUPRIC_CANDLE.get());
-            }
-            addAfter(entries, Items.PINK_CANDLE, WBlocks.TALL_CANDLE.get());
-            addAfter(entries, WBlocks.TALL_CANDLE.get(), WBlocks.SOUL_TALL_CANDLE.get());
-            for (DyeColor color : customColorOrderR) {
-                addAfter(entries, WBlocks.SOUL_TALL_CANDLE.get(), getBlockFromString(color + "_tall_candle"));
-            }
-            if (ModList.get().isLoaded("endergetic")) {
-                addAfter(entries, WBlocks.SOUL_TALL_CANDLE.get(), WBlocks.ENDER_TALL_CANDLE.get());
-            }
-            if (ModList.get().isLoaded("caverns_and_chasms")) {
-                addAfter(entries, WBlocks.SOUL_TALL_CANDLE.get(), WBlocks.CUPRIC_TALL_CANDLE.get());
+            if (WaxedAndShinyConfig.TALL_CANDLES.get()) {
+                addAfter(entries, Items.PINK_CANDLE, WBlocks.TALL_CANDLE.get());
+                for (DyeColor color : customColorOrderR) {
+                    addAfter(entries, WBlocks.TALL_CANDLE.get(), getBlockFromString(color + "_tall_candle"));
+                }
+                if (WaxedAndShinyConfig.CANDLE_VARIANTS.get()) {
+                    addAfter(entries, WBlocks.TALL_CANDLE.get(), WBlocks.SOUL_TALL_CANDLE.get());
+                    if (ModList.get().isLoaded("endergetic")) {
+                        addAfter(entries, WBlocks.SOUL_TALL_CANDLE.get(), WBlocks.ENDER_TALL_CANDLE.get());
+                    }
+                    if (ModList.get().isLoaded("caverns_and_chasms")) {
+                        addAfter(entries, WBlocks.SOUL_TALL_CANDLE.get(), WBlocks.CUPRIC_TALL_CANDLE.get());
+                    }
+                }
             }
         }
-        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS && WaxedAndShinyConfig.WAX_AND_WAX_BLOCKS.get()) {
             addAfter(entries, Items.STRING, WBlocks.WICK.get());
             addAfter(entries, Items.HONEYCOMB, WItems.WAX.get());
         }
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS && WaxedAndShinyConfig.WAXED_BLOCKS.get()) {
             addAfter(entries, Items.WAXED_OXIDIZED_CUT_COPPER_SLAB,
                     WBlocks.WAXED_SAND.get(),
                     WBlocks.WAXED_RED_SAND.get(),
                     WBlocks.WAXED_GRAVEL.get(),
-                    WBlocks.WAXED_ICE.get(),
-                    WBlocks.WAXED_SPONGE.get());
+                    WBlocks.WAXED_ICE.get());
             if (ModList.get().isLoaded("supplementaries")){
-                addAfter(entries, WBlocks.WAXED_SPONGE.get(),
+                addAfter(entries, WBlocks.WAXED_ICE.get(),
                         WBlocks.WAXED_SUGAR_CUBE.get(),
                         WBlocks.WAXED_RAKED_GRAVEL.get());
             }
+            if (ModList.get().isLoaded("atmospheric")){
+                addAfter(entries, WBlocks.WAXED_ICE.get(),
+                        WBlocks.WAXED_ARID_SAND.get(),
+                        WBlocks.WAXED_RED_ARID_SAND.get());
+            }
             if (ModList.get().isLoaded("oreganized")){
-                addAfter(entries, OBlocks.GROOVED_ICE.get(), WBlocks.WAXED_GROOVED_ICE.get());
+                addAfter(entries, Waxed.getBlockFromString("oreganized", "grooved_ice"), WBlocks.WAXED_GROOVED_ICE.get());
             }
         }
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
-            addBefore(entries, Blocks.SLIME_BLOCK, WBlocks.EMPTY_HONEYCOMB.get());
+            if (WaxedAndShinyConfig.WAX_AND_WAX_BLOCKS.get()) addBefore(entries, Blocks.SLIME_BLOCK, WBlocks.EMPTY_HONEYCOMB.get());
+            if (WaxedAndShinyConfig.WAXED_BLOCKS.get())
             if (ModList.get().isLoaded("upgrade_aquatic")) {
                 addAfter(entries, UABlocks.PRISMARINE_CORAL_BLOCK.get(),
                         WBlocks.WAXED_TUBE_CORAL_BLOCK.get(),
@@ -279,42 +283,56 @@ public class Waxed {
             }
         }
         if (event.getTabKey() == CreativeModeTabs.COLORED_BLOCKS) {
-            addAfter(entries, Items.CANDLE, WBlocks.SOUL_CANDLE.get());
-            if (ModList.get().isLoaded("endergetic")) {
-                addAfter(entries, WBlocks.SOUL_CANDLE.get(), WBlocks.ENDER_CANDLE.get());
+            if (WaxedAndShinyConfig.WAXED_BLOCKS.get()) {
+                for (DyeColor color : customColorOrderR) {
+                    addAfter(entries, Items.PINK_CONCRETE_POWDER, getBlockFromString("waxed_" + color + "_concrete_powder"));
+                }
             }
-            if (ModList.get().isLoaded("caverns_and_chasms")) {
-                addAfter(entries, WBlocks.SOUL_CANDLE.get(), WBlocks.CUPRIC_CANDLE.get());
+            if (WaxedAndShinyConfig.CANDLE_VARIANTS.get()) {
+                addAfter(entries, Items.CANDLE, WBlocks.SOUL_CANDLE.get());
+                if (ModList.get().isLoaded("endergetic")) {
+                    addAfter(entries, WBlocks.SOUL_CANDLE.get(), WBlocks.ENDER_CANDLE.get());
+                }
+                if (ModList.get().isLoaded("caverns_and_chasms")) {
+                    addAfter(entries, WBlocks.SOUL_CANDLE.get(), WBlocks.CUPRIC_CANDLE.get());
+                }
             }
-            addAfter(entries, Items.PINK_CANDLE, WBlocks.TALL_CANDLE.get());
-            addAfter(entries, WBlocks.TALL_CANDLE.get(), WBlocks.SOUL_TALL_CANDLE.get());
-            for (DyeColor color : customColorOrderR) {
-                addAfter(entries, WBlocks.SOUL_TALL_CANDLE.get(), getBlockFromString(color + "_tall_candle"));
+            if (WaxedAndShinyConfig.TALL_CANDLES.get()) {
+                addAfter(entries, Items.PINK_CANDLE, WBlocks.TALL_CANDLE.get());
+                for (DyeColor color : customColorOrderR) {
+                    addAfter(entries, WBlocks.TALL_CANDLE.get(), getBlockFromString(color + "_tall_candle"));
+                }
+                if (WaxedAndShinyConfig.CANDLE_VARIANTS.get()) {
+                    addAfter(entries, WBlocks.TALL_CANDLE.get(), WBlocks.SOUL_TALL_CANDLE.get());
+                    if (ModList.get().isLoaded("endergetic")) {
+                        addAfter(entries, WBlocks.SOUL_TALL_CANDLE.get(), WBlocks.ENDER_TALL_CANDLE.get());
+                    }
+                    if (ModList.get().isLoaded("caverns_and_chasms")) {
+                        addAfter(entries, WBlocks.SOUL_TALL_CANDLE.get(), WBlocks.CUPRIC_TALL_CANDLE.get());
+                    }
+                }
             }
-            if (ModList.get().isLoaded("endergetic")) {
-                addAfter(entries, WBlocks.SOUL_TALL_CANDLE.get(), WBlocks.ENDER_TALL_CANDLE.get());
-            }
-            if (ModList.get().isLoaded("caverns_and_chasms")) {
-                addAfter(entries, WBlocks.SOUL_TALL_CANDLE.get(), WBlocks.CUPRIC_TALL_CANDLE.get());
-            }
-            addBefore(entries, Items.CANDLE,
-                    WBlocks.WAX_BLOCK.get(),
-                    WBlocks.SOUL_WAX_BLOCK.get(),
-                    WBlocks.WAX_PILLAR.get(),
-                    WBlocks.SOUL_WAX_PILLAR.get()
-            );
-            for (DyeColor color : customColorOrderR) {
-                addAfter(entries, WBlocks.SOUL_WAX_BLOCK.get(), getBlockFromString(color + "_wax_block"));
-                addAfter(entries, WBlocks.SOUL_WAX_PILLAR.get(), getBlockFromString(color + "_wax_pillar"));
-                addAfter(entries, Items.PINK_CONCRETE_POWDER, getBlockFromString("waxed_" + color + "_concrete_powder"));
-            }
-            if (ModList.get().isLoaded("endergetic")) {
-                addAfter(entries, WBlocks.SOUL_WAX_BLOCK.get(), WBlocks.ENDER_WAX_BLOCK.get());
-                addAfter(entries, WBlocks.SOUL_WAX_PILLAR.get(), WBlocks.ENDER_WAX_PILLAR.get());
-            }
-            if (ModList.get().isLoaded("caverns_and_chasms")) {
-                addAfter(entries, WBlocks.SOUL_WAX_BLOCK.get(), WBlocks.CUPRIC_WAX_BLOCK.get());
-                addAfter(entries, WBlocks.SOUL_WAX_PILLAR.get(), WBlocks.CUPRIC_WAX_PILLAR.get());
+            if (WaxedAndShinyConfig.WAX_AND_WAX_BLOCKS.get()) {
+                addBefore(entries, Items.CANDLE,
+                        WBlocks.WAX_BLOCK.get(),
+                        WBlocks.WAX_PILLAR.get());
+                for (DyeColor color : customColorOrderR) {
+                    addAfter(entries, WBlocks.WAX_BLOCK.get(), getBlockFromString(color + "_wax_block"));
+                    addAfter(entries, WBlocks.WAX_PILLAR.get(), getBlockFromString(color + "_wax_pillar"));
+                }
+                if (WaxedAndShinyConfig.CANDLE_VARIANTS.get()) {
+                    addBefore(entries, Items.CANDLE,
+                            WBlocks.SOUL_WAX_BLOCK.get(),
+                            WBlocks.SOUL_WAX_PILLAR.get());
+                    if (ModList.get().isLoaded("endergetic")) {
+                        addAfter(entries, WBlocks.SOUL_WAX_BLOCK.get(), WBlocks.ENDER_WAX_BLOCK.get());
+                        addAfter(entries, WBlocks.SOUL_WAX_PILLAR.get(), WBlocks.ENDER_WAX_PILLAR.get());
+                    }
+                    if (ModList.get().isLoaded("caverns_and_chasms")) {
+                        addAfter(entries, WBlocks.SOUL_WAX_BLOCK.get(), WBlocks.CUPRIC_WAX_BLOCK.get());
+                        addAfter(entries, WBlocks.SOUL_WAX_PILLAR.get(), WBlocks.CUPRIC_WAX_PILLAR.get());
+                    }
+                }
             }
         }
     }

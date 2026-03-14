@@ -92,6 +92,6 @@ public class WaxedRakedGravelBlock extends RakedGravelBlock {
     }
 
     public static void turnToGravel(BlockState state, Level level, BlockPos pos) {
-        level.setBlockAndUpdate(pos, Block.pushEntitiesUp(state, Blocks.GRAVEL.defaultBlockState(), level, pos));
+        level.setBlockAndUpdate(pos, Block.pushEntitiesUp(state, WBlocks.WAXED_GRAVEL.get().defaultBlockState(), level, pos));
     }
 }

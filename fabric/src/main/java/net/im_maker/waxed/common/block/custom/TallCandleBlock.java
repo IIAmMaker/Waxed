@@ -51,7 +51,6 @@ public class TallCandleBlock extends RotatedPillarBlock implements SimpleWaterlo
     private final ResourceLocation particle;
 
     public TallCandleBlock(boolean isSoul, ResourceLocation particle, Properties properties) {
-        // Create properties with light level first
         super(createProperties(isSoul, properties));
         this.particle = particle;
         this.registerDefaultState(this.stateDefinition.any()
@@ -65,10 +64,6 @@ public class TallCandleBlock extends RotatedPillarBlock implements SimpleWaterlo
         this(false, WParticles.PARTICLES.FLAME, properties);
     }
 
-    //public TallCandleBlock(boolean isSoul, ResourceLocation particleType, Properties properties) {
-    //    this(isSoul, (ParticleOptions)BuiltInRegistries.PARTICLE_TYPE.get(particleType), properties);
-    //}
-
     private static Properties createProperties(boolean isSoul, Properties properties) {
         return properties.lightLevel(blockState -> {
             if (blockState.getValue(LIT)) {
@@ -81,7 +76,6 @@ public class TallCandleBlock extends RotatedPillarBlock implements SimpleWaterlo
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack heldItem = player.getItemInHand(hand);
-        // Handle candle stacking
         if (heldItem.is(this.asItem()) && hit.getDirection() == Direction.UP && state.getValue(CANDLE_PART) == CandlePart.SHORT) {
             boolean aboveStateIsTallCandle = level.getBlockState(pos.above()).is(WTags.Blocks.TALL_CANDLES);
             boolean isShortLit = level.getBlockState(pos).getValue(LIT);
@@ -92,7 +86,6 @@ public class TallCandleBlock extends RotatedPillarBlock implements SimpleWaterlo
             level.playSound(player, pos, SoundEvents.CANDLE_PLACE, SoundSource.BLOCKS);
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
-        // Handle lighting
         if (canLight(state) && (heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE))) {
             if (heldItem.is(Items.FLINT_AND_STEEL)) {
                 heldItem.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
@@ -106,7 +99,6 @@ public class TallCandleBlock extends RotatedPillarBlock implements SimpleWaterlo
             level.updateNeighborsAt(pos.below(), level.getBlockState(pos.below()).getBlock());
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
-        // Handle extinguishing
         if (player.getAbilities().mayBuild && heldItem.isEmpty() && state.getValue(LIT) && !state.getValue(CANDLE_PART).equals(CandlePart.MIDDLE)) {
             level.setBlock(pos, state.setValue(LIT, false), 3);
             double yOffset = state.getValue(CANDLE_PART).equals(CandlePart.SHORT) ? 0.5D : 0.0D;
@@ -116,17 +108,6 @@ public class TallCandleBlock extends RotatedPillarBlock implements SimpleWaterlo
         }
         return super.use(state, level, pos, player, hand, hit);
     }
-
-    //@Override
-    //public boolean canBeReplaced(BlockState blockState, BlockPlaceContext context) {
-    //    // Allow replacement if:
-    //    // 1. Not sneaking
-    //    // 2. Holding the same candle
-    //    // 3. Current candle is SHORT
-    //    return !context.isSecondaryUseActive()
-    //            && context.getItemInHand().is(this.asItem())
-    //            && blockState.getValue(CANDLE_PART) == CandlePart.SHORT;
-    //}
 
     @Override
     public boolean placeLiquid(LevelAccessor level, BlockPos pos, BlockState state, FluidState fluidState) {
@@ -167,11 +148,6 @@ public class TallCandleBlock extends RotatedPillarBlock implements SimpleWaterlo
                         .setValue(WATERLOGGED, waterlogged);
             }
         }
-
-        System.out.println(belowState.is(WTags.Blocks.TALL_CANDLES) && belowState.getValue(LIT) && !belowState.getValue(CANDLE_PART).equals(CandlePart.SHORT));
-
-
-        // Default placement (always SHORT candle)
         return this.defaultBlockState()
                 .setValue(CANDLE_PART, CandlePart.SHORT)
                 .setValue(WATERLOGGED, waterlogged);
@@ -217,13 +193,11 @@ public class TallCandleBlock extends RotatedPillarBlock implements SimpleWaterlo
     }
 
     public static boolean canLight(BlockState blockState) {
-        // Check if it's a candle block with required properties
         if (!blockState.hasProperty(LIT) ||
                 !blockState.hasProperty(WATERLOGGED)) {
             return false;
         }
 
-        // Combine all lighting conditions
         return !blockState.getValue(CANDLE_PART).equals(CandlePart.MIDDLE) &&
                 !blockState.getValue(LIT) &&
                 !blockState.getValue(WATERLOGGED);
@@ -239,7 +213,7 @@ public class TallCandleBlock extends RotatedPillarBlock implements SimpleWaterlo
 
 
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-        if (blockState.getValue(LIT)) {
+        if (blockState.getValue(LIT) && !blockState.getValue(CANDLE_PART).equals(CandlePart.MIDDLE)) {
             Vec3 vec3 = new Vec3(blockPos.getX() + 0.5D, blockPos.getY() + 1.21875D - (blockState.getValue(CANDLE_PART).equals(CandlePart.SHORT) ? 0.5D : 0.0D), blockPos.getZ() + 0.5D);
             addParticlesAndSound(level, particle, vec3, randomSource);
         }

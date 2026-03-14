@@ -32,21 +32,20 @@ public class DataPackRegistrar {
 
     public static void loadBuiltinResourcePacks() {
         Optional<ModContainer> modContainer = FabricLoader.getInstance().getModContainer(Waxed.MOD_ID);
-        if (modContainer.isPresent()) {
-            if (FabricLoader.getInstance().isModLoaded("dye_depot")) {
-                registerBuiltinDataPack(modContainer.get(), "waxed_dye_depot_compat", "Dye Depot");
-            }
+        if (modContainer.isEmpty()) return;
+        if (isModLoaded("dye_depot")) {
+            registerBuiltinDataPack(modContainer.get(), "waxed_dye_depot_compat", "Dye Depot");
         }
-        if (modContainer.isPresent()) {
-            if (FabricLoader.getInstance().isModLoaded("supplementaries")) {
-                registerBuiltinDataPack(modContainer.get(), "waxed_supplementaries_compat", "Supplementaries");
-            }
+        if (isModLoaded("supplementaries")) {
+            registerBuiltinDataPack(modContainer.get(), "waxed_supplementaries_compat", "Supplementaries");
         }
-        if (modContainer.isPresent()) {
-            WaxedAndShinyConfig CONFIG = AutoConfig.getConfigHolder(WaxedAndShinyConfig.class).getConfig();
-            if (CONFIG.generateWaxingRecipes) {
-                registerBuiltinDataPack(modContainer.get(), "waxed_generated_recipes");
-            }
+        WaxedAndShinyConfig CONFIG = AutoConfig.getConfigHolder(WaxedAndShinyConfig.class).getConfig();
+        if (CONFIG.generateWaxingRecipes) {
+            registerBuiltinDataPack(modContainer.get(), "waxed_generated_recipes");
         }
+    }
+
+    private static boolean isModLoaded(String mod) {
+        return FabricLoader.getInstance().isModLoaded(mod);
     }
 }

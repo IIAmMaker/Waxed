@@ -1,8 +1,6 @@
 package net.im_maker.waxed.common.util.jei;
 
 import mezz.jei.api.constants.ModIds;
-import net.im_maker.waxed.common.item.WItems;
-import net.im_maker.waxed.common.player.interactions.WaxingBlocks;
 import net.im_maker.waxed.common.util.WTags;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +12,8 @@ import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.block.Block;
+import net.im_maker.waxed.common.item.WItems;
+import net.im_maker.waxed.common.player.interactions.WaxingBlocks;
 
 import java.util.ArrayList;
 import java.util.List;

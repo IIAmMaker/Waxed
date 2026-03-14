@@ -54,3 +54,9 @@ mandatory=false
 versionRange="*"
 ordering="AFTER"
 side="BOTH"
+[[dependencies.${mod_id}]]
+modId="atmospheric"
+mandatory=false
+versionRange="*"
+ordering="AFTER"
+side="BOTH"

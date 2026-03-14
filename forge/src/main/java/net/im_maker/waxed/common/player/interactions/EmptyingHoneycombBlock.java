@@ -2,6 +2,7 @@ package net.im_maker.waxed.common.player.interactions;
 
 import net.im_maker.waxed.Waxed;
 import net.im_maker.waxed.common.block.WBlocks;
+import net.im_maker.waxed.config.WaxedAndShinyConfig;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,6 +25,7 @@ public class EmptyingHoneycombBlock {
 
     //@SubscribeEvent
     public static InteractionResult emptyingHoneycombBlock(final PlayerInteractEvent.RightClickBlock interactEvent) {
+        if (WaxedAndShinyConfig.WAX_AND_WAX_BLOCKS.get()) return (InteractionResult.PASS);
         Level level = interactEvent.getLevel();
         BlockPos blockPos = interactEvent.getPos();
         BlockState blockState = level.getBlockState(blockPos);
